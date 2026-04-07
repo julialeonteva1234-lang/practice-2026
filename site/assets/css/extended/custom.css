@@ -1,0 +1,91 @@
+
+/* Плавные переходы */
+* {
+    transition: all 0.2s ease;
+}
+/* Фиксированная шапка*/
+header, 
+.nav, 
+.navigation, 
+.main-nav,
+.site-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
+}
+
+/* Цветные блоки при наведении */
+div[style*="background: #f0f7f0"]:hover,
+div[style*="background: #fff8f0"]:hover,
+div[style*="background: #e8f0fe"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Зеленые карточки при наведении */
+div[style*="background: #2c5f2d"]:hover {
+    background: #1e4520 !important;
+    transform: translateY(-2px);
+}
+
+/* Серая секция планов */
+div[style*="background: #f5f5f5"]:hover {
+    background: #e8e8e8 !important;
+}
+
+/* Минималистичная кнопка темы */
+.theme-toggle {
+    opacity: 0.3 !important;
+    transform: scale(0.7) !important;
+}
+
+.theme-toggle:hover {
+    opacity: 0.7 !important;
+    transform: scale(0.75) !important;
+}
+
+/* Аккуратные ссылки */
+a {
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+}
+
+a:hover {
+    border-bottom-color: #2c5f2d;
+}
+
+/* Зеленая шапка */
+.nav {
+    background: #2c5f2d !important;
+}
+
+.nav a, 
+.nav .logo a, 
+.nav .menu a {
+    color: white !important;
+}
+
+.nav a:hover, 
+.nav .menu a:hover {
+    color: #c8e6c9 !important;
+}
+
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+/* Полное отключение якорных ссылок */
+.header-link {
+    display: none !important;
+}
+
+.anchor {
+    display: none !important;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    display: none !important;
+}

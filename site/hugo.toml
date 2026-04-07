@@ -1,0 +1,40 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'Fungi | Энциклопедия грибов'
+theme = "PaperMod"
+paginate = 5
+
+[params]
+  
+  description = "Сайт по проектной практике"
+  mainSections = [" "]  
+  summaryLength = 150
+  ShowAnchorLinks = false
+  # Меню навигации
+  [[menu.main]]
+    identifier = "about"
+    name = "О проекте"
+    url = "/about/"
+    weight = 1
+  
+  [[menu.main]]
+    identifier = "members"
+    name = "Участники"
+    url = "/members/"
+    weight = 2
+  
+  [[menu.main]]
+    identifier = "journal"
+    name = "Журнал"
+    url = "/journal/"
+    weight = 3
+  
+  [[menu.main]]
+    identifier = "resources"
+    name = "Ресурсы"
+    url = "/resources/"
+    weight = 4
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
