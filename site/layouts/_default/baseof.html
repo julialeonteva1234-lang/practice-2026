@@ -9,9 +9,9 @@
 <body>
 
 <!-- Ваша шапка -->
-<header style="position: sticky; top: 0; z-index: 9999; background: #2c5f2d; width: 100%; padding: 15px 20px;">
+<header style="position: sticky; top: 0; z-index: 9999; background: #2c5f2d; width: 100%; padding: 25px 20px;">
     <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between;">
-        <a href="/" style="color: white; text-decoration: none; font-size: 1.3rem;">🍄 Fungi</a>
+        <a href="/" style="color: white; text-decoration: none; font-size: 1.3rem;">🍄 Fungi | Энциклопедия грибов</a>
         <nav>
             <a href="/about/" style="color: white; margin-left: 20px;">О проекте</a>
             <a href="/members/" style="color: white; margin-left: 20px;">Участники</a>
@@ -20,8 +20,6 @@
         </nav>
     </div>
 </header>
-
-<div style="height: 70px;"></div>
 
 <main>
     {{ block "main" . }}{{ end }}

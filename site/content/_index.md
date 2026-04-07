@@ -1,6 +1,7 @@
+<div style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+
 # 🍄 Fungi
 
-<div style="max-width: 900px; margin: 0 auto; padding: 20px;">
 <p style="font-size: 1.3rem; color: #2c5f2d; font-weight: 300; margin-bottom: 40px;">
 Платформа с энциклопедией грибов и интересными статьями о них
 </p>
