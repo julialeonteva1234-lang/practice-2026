@@ -1,3 +1,5 @@
+<div style = "display: flex; justify-content: center; flex-direction: column; margin: 0 auto; max-width: 900px">
+
 # Участники и их вклад в проект
 
 ### Диаграмма Ганта
@@ -7,3 +9,5 @@
 ### Ссылка на данные о вкладе каждого участника в проект (2 страница файла)
 
 https://docs.google.com/spreadsheets/d/1lYiJbaeKPlOGGZh-LsOl9kD03W7hRCcG2Vh0RRbP2YE/edit?usp=sharing
+
+</div>

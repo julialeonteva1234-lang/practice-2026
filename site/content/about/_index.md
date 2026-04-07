@@ -1,3 +1,5 @@
+<div style = "display: flex; justify-content: center; flex-direction: column; margin: 0 auto; max-width: 900px">
+
 # О проекте
 
 {{< figure src="/images/grib.jpg" alt="картинка гриба" width="300" >}}
@@ -30,3 +32,5 @@
 - Тестирование итоговых продуктов и их дальнейшая поддержка
 
 ### Куратор: Юрченко Александр Владимирович
+
+</div>
