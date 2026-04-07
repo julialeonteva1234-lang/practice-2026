@@ -2,6 +2,8 @@
 title: "Запись №1"
 ---
 
+<div style = "display: flex; justify-content: center; flex-direction: column; margin: 0 auto; max-width: 900px">
+
 #### _02.04.2026_
 
 Искусственный интеллект в действии!
@@ -10,4 +12,6 @@ title: "Запись №1"
 
 <div style = "display: flex; justify-content: center">
     <img src = "/images/Искуственный интеллект.png" width: auto; heigth = 200px>
+</div>
+
 </div>

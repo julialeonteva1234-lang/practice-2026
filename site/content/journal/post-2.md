@@ -2,6 +2,8 @@
 title: "Запись №2"
 ---
 
+<div style = "display: flex; justify-content: center; flex-direction: column; margin: 0 auto; max-width: 900px">
+
 #### _04.04.2026_
 
 Грибы в массы
@@ -11,4 +13,5 @@ title: "Запись №2"
 <div style = "display: flex; gap: 30px; justify-content: center">
     <img src = "/images/Пост1.png" alt = '1post' width: auto; height = 400px>
     <img src = "/images/Пост2.png" alt = '2post' width : auto; height = 400px>
+</div>
 </div>

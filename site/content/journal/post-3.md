@@ -2,6 +2,8 @@
 title: "Запись №3"
 ---
 
+<div style = "display: flex; justify-content: center; flex-direction: column; margin: 0 auto; max-width: 900px">
+
 #### _06.04.2026_
 
 Маркетинг - важная часть любого проекта!
@@ -11,4 +13,5 @@ title: "Запись №3"
 <div style = 'display: flex; flex-direction: column; gap: 30 px; justify-content: center'>
     <img src = "/images/Анализ конкурентов.png" width: auto; height = 400px>
     <img src = "/images/SWOT-анализ.png" width: auto; heigh = 50px>
+</div>
 </div>
