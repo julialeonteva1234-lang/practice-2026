@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    {{ partial "head.html" . }}
+</head>
+<body>
+
+<!-- Ваша шапка -->
+<header style="position: sticky; top: 0; z-index: 9999; background: #2c5f2d; width: 100%; padding: 15px 20px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between;">
+        <a href="/" style="color: white; text-decoration: none; font-size: 1.3rem;">🍄 Fungi</a>
+        <nav>
+            <a href="/about/" style="color: white; margin-left: 20px;">О проекте</a>
+            <a href="/members/" style="color: white; margin-left: 20px;">Участники</a>
+            <a href="/journal/" style="color: white; margin-left: 20px;">Журнал</a>
+            <a href="/resources/" style="color: white; margin-left: 20px;">Ресурсы</a>
+        </nav>
+    </div>
+</header>
+
+<div style="height: 70px;"></div>
+
+<main>
+    {{ block "main" . }}{{ end }}
+</main>
+
+</body>
+</html>
