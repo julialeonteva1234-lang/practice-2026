@@ -9,7 +9,6 @@ paginate = 5
   description = "Сайт по проектной практике"
   mainSections = [" "]  
   summaryLength = 150
-  ShowAnchorLinks = false
   # Меню навигации
   [[menu.main]]
     identifier = "about"
