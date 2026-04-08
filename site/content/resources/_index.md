@@ -10,4 +10,12 @@ https://www.figma.com/design/oorZ7KHXzZVwJL3Anol3kC/Fungi-Черновик?node-
 
 https://t.me/fungiofficial
 
+### В ходе работы над проектом были изучены статьи по теме из телеграм-каналов:
+
+https://t.me/Fourier_series/562, https://t.me/ilkhomnazarov/24
+
+### Ссылка на проект Fungi на GitHab:
+
+https://github.com/MikhailPshenisnov/Fungi_2/
+
 </div>
