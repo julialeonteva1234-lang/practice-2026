@@ -20,12 +20,14 @@
         </nav>
     </div>
 </header>
+{{ if not .IsHome }}
 <!-- Кнопка "Назад" -->
-<div style="max-width: 900px; margin: -10px 40px -40px; padding: 10px 20px 0 20px;">
+<div style="max-width: 900px; margin: -5px 230px -80px; padding: 10px 20px 10px 20px;">
     <a href="javascript:history.back()" style="display: inline-block; color: #2c5f2d; text-decoration: none; font-size: 3rem;  text-decoration: none; margin: 0; padding: 0; line-height: 1;">
         ← 
     </a>
 </div>
+{{ end }}
 <main>
     {{ block "main" . }}{{ end }}
 </main>

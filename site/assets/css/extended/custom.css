@@ -96,6 +96,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 /* Отступы у заголовков статей */
 .post-title {
+    margin-top: 5%; 
     margin-left: 20% !important;
     margin-right: 20% !important;
 }
