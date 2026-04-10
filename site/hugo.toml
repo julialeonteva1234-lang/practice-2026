@@ -3,9 +3,7 @@ locale = 'en-us'
 title = 'Fungi | Энциклопедия грибов'
 theme = "PaperMod"
 paginate = 5
-
 [params]
-  
   description = "Сайт по проектной практике"
   mainSections = [" "]  
   summaryLength = 150
