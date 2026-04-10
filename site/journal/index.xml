@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fungi | Энциклопедия грибов</title><link>https://example.org/journal/</link><description>Recent content on Fungi | Энциклопедия грибов</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://example.org/journal/index.xml" rel="self" type="application/rss+xml"/><item><title>Запись №1</title><link>https://example.org/journal/post-1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/journal/post-1/</guid><description>&lt;div style = "display: flex; justify-content: center; flex-direction: column; margin: 0 auto; max-width: 900px"&gt;
+&lt;h4 id="02042026"&gt;&lt;em&gt;02.04.2026&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;Искусственный интеллект в действии!&lt;/p&gt;
+&lt;p&gt;Для нашей платформы активно ведётся разработка и обучение искусственного интеллекта для распознавания грибов. Был изучен и переработан код модели, добавлены базы данных, на которые будет опираться ИИ-помощник. Распознавание грибов по фотографии становится все более точным, разработчики нашей команды совершенствуют этот инструмент и он уже находится на высоком уровне проработки.&lt;/p&gt;
+&lt;div style = "display: flex; justify-content: center"&gt;
+&lt;img src = "/images/Искуственный интеллект.png" width: auto; heigth = 200px&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>Запись №2</title><link>https://example.org/journal/post-2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/journal/post-2/</guid><description>&lt;div style = "display: flex; justify-content: center; flex-direction: column; margin: 0 auto; max-width: 900px"&gt;
+&lt;h4 id="04042026"&gt;&lt;em&gt;04.04.2026&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;Грибы в массы&lt;/p&gt;
+&lt;p&gt;Команда копирайтинга не сидит на месте. Проект Fungi имеет Телеграмм канал, который активно ведётся. В нем выкладывают посты, посвящённые теме проекта. Данные канал будет интересен как грибникам, так и людям, не занимающимся сбором грибов. Посты направлены на охват большой аудитории, чтобы информация в них была понятна и интересна даже человеку, который не глубоко погружен в изучение грибов, а только интересуется ими.&lt;/p&gt;</description></item><item><title>Запись №3</title><link>https://example.org/journal/post-3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/journal/post-3/</guid><description>&lt;div style = "display: flex; justify-content: center; flex-direction: column; margin: 0 auto; max-width: 900px"&gt;
+&lt;h4 id="06042026"&gt;&lt;em&gt;06.04.2026&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;Маркетинг - важная часть любого проекта!&lt;/p&gt;
+&lt;p&gt;В ходе работы над проектом были выполнен анализ конкурентов, выявлены основные проблемы пользователей, был сделан SWOT- анализ.&lt;/p&gt;
+&lt;div style = 'display: flex; flex-direction: column; gap: 30 px; justify-content: center'&gt;
+&lt;img src = "/images/Анализ конкурентов.png" width: auto; height = 400px&gt;
+&lt;img src = "/images/SWOT-анализ.png" width: auto; heigh = 50px&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item></channel></rss>
