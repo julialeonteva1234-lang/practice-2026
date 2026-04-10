@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+
+    <link rel="stylesheet" href="practice-2026\site\css\style.css">
+
+    {{ partial "head.html" . }}
+</head>
+<body>
+
+<!-- Ваша шапка -->
+<header style="position: sticky; top: 0; z-index: 9999; background: #2c5f2d; width: 100%; padding: 25px 20px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between;">
+        <a href="/" style="color: white; text-decoration: none; font-size: 1.3rem;">🍄 Fungi | Энциклопедия грибов</a>
+        <nav>
+            <a href="/about/" style="color: white; margin-left: 20px;">О проекте</a>
+            <a href="/members/" style="color: white; margin-left: 20px;">Участники</a>
+            <a href="/journal/" style="color: white; margin-left: 20px;">Журнал</a>
+            <a href="/resources/" style="color: white; margin-left: 20px;">Ресурсы</a>
+        </nav>
+    </div>
+</header>
+{{ if not .IsHome }}
+<!-- Кнопка "Назад" -->
+<div style="max-width: 900px; margin: -5px 230px -80px; padding: 10px 20px 10px 20px;">
+    <a href="javascript:history.back()" style="display: inline-block; color: #2c5f2d; text-decoration: none; font-size: 3rem;  text-decoration: none; margin: 0; padding: 0; line-height: 1;">
+        ← 
+    </a>
+</div>
+{{ end }}
+<main>
+    {{ block "main" . }}{{ end }}
+</main>
+
+</body>
+</html>
