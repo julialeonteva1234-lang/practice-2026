@@ -18,8 +18,4 @@ https://t.me/Fourier_series/562, https://t.me/ilkhomnazarov/24
 
 https://github.com/MikhailPshenisnov/Fungi_2/
 
-### Наш партнер:
-
-https://агентыразвития.рф/
-
 </div>
