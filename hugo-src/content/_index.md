@@ -88,13 +88,13 @@
 
 ---
 
-## Последние записи из журнала
+## Последняя запись из журнала
 
 <div style="background: #fafafa; padding: 20px; border-radius: 12px; margin: 15px 0; border-left: 3px solid #2c5f2d;">
-    <h3 style="margin: 0 0 10px 0;">📄 Запись №1</h3>
-    <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">02.04.2026</p>
-    <p style="margin-bottom: 15px;">"Искусственный интеллект в действии!"</p>
-    <a href="/journal/post-1" style="background: none; border: 1px solid #2c5f2d; color: #2c5f2d; padding: 5px 15px; border-radius: 20px; text-decoration: none; font-size: 0.85rem;">Читать →</a>
+    <h3 style="margin: 0 0 10px 0;">📄 Запись №4</h3>
+    <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">16.04.2026</p>
+    <p style="margin-bottom: 15px;">"Взаимодействие с организацией-партнёром"</p>
+    <a href="/journal/post-4" style="background: none; border: 1px solid #2c5f2d; color: #2c5f2d; padding: 5px 15px; border-radius: 20px; text-decoration: none; font-size: 0.85rem;">Читать →</a>
 </div>
 
 <div style="text-align: center; margin: 20px 0 40px 0;">
