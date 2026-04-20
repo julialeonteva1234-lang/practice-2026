@@ -96,13 +96,9 @@
 
 # Техническое руководство по созданию Telegram-бота
 
-## Для кого это руководство
-
 ## Это руководство для начинающих программистов. Достаточно знать самые основы Python: переменные, функции, условные операторы (if-else).
 
-## Что будет создано
-
-Вот список того, что будет уметь бот после прохождения руководства:
+**Вот список того, что будет уметь бот после прохождения руководства:**
 
 1. Приветствовать пользователя после команды `/start`
 2. Показывать меню из нескольких кнопок
@@ -220,6 +216,7 @@ BOT_TOKEN=1234567890:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw9
 - Нет лишних слов
 ## Шаг 7. Написание кода бота
 Создайте в папке проекта новый файл с именем bot.py.
+
 Часть 1. Импорт библиотек и настройка
 ---
 ```
@@ -244,3 +241,272 @@ if not BOT_TOKEN:
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 ```
+Часть 2. Настройка текстов
+---
+В этом классе вы определяете, какие кнопки будут у бота и что он будет отвечать.
+```
+class MenuText:
+    BTN_1 = "📖 О проекте"           # Первая кнопка
+    BTN_2 = "🎯 Наши цели"           # Вторая кнопка
+    BTN_3 = "🤝 Партнёры"            # Третья кнопка
+    BTN_4 = "📱 Соцсети"             # Четвёртая кнопка
+    BTN_QUIZ = "❓ Пройти тест"      # Кнопка для запуска квиза
+    BTN_STATS = "📊 Статистика"      # Кнопка для показа статистики
+    
+    MSG_START = "Привет! Я бот проекта. Выберите, что вас интересует:"
+    MSG_1 = "Информация о проекте..."           # Напишите свой текст
+    MSG_2 = "Наши цели и задачи..."             # Напишите свой текст
+    MSG_3 = "Информация о партнёрах..."         # Напишите свой текст
+    MSG_4 = "Наши соцсети: ..."                 # Напишите свой текст
+    
+    @classmethod
+    def get_all_buttons(cls):
+        """Возвращает все кнопки в нужном порядке"""
+        return [
+            [KeyboardButton(text=cls.BTN_1)],
+            [KeyboardButton(text=cls.BTN_2)],
+            [KeyboardButton(text=cls.BTN_3)],
+            [KeyboardButton(text=cls.BTN_4)],
+            [KeyboardButton(text=cls.BTN_QUIZ)],
+            [KeyboardButton(text=cls.BTN_STATS)]
+        ]
+```
+Часть 3. База данных
+---
+```
+def init_db():
+    """Создаёт таблицу в базе данных, если её ещё нет"""
+    conn = sqlite3.connect("quiz_stats.db")
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS quiz_results (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            username TEXT,
+            answer TEXT,
+            date TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+def save_result(user_id, username, answer):
+    """Сохраняет результат квиза в базу данных"""
+    conn = sqlite3.connect("quiz_stats.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO quiz_results (user_id, username, answer, date) VALUES (?, ?, ?, ?)",
+        (user_id, username, answer, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    )
+    conn.commit()
+    conn.close()
+
+def get_stats(limit=5):
+    """Возвращает статистику (топ самых популярных ответов)"""
+    conn = sqlite3.connect("quiz_stats.db")
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT answer, COUNT(*) as count 
+        FROM quiz_results 
+        GROUP BY answer 
+        ORDER BY count DESC 
+        LIMIT ?
+    ''', (limit,))
+    results = cursor.fetchall()
+    conn.close()
+    return results
+```
+Часть 4. Вопросы для квиза
+Здесь вы определяете, какие вопросы будут в квизе. Каждый вопрос содержит:
+question — текст вопроса
+options — список вариантов ответа
+results — соответствие между вариантом ответа и результатом
+```
+QUIZ = [
+    {
+        "question": "Ваш первый вопрос?",
+        "options": ["Вариант А", "Вариант Б", "Вариант В", "Вариант Г"],
+        "results": {
+            "Вариант А": "Результат 1",
+            "Вариант Б": "Результат 2",
+            "Вариант В": "Результат 3",
+            "Вариант Г": "Результат 4"
+        }
+    },
+    {
+        "question": "Ваш второй вопрос?",
+        "options": ["Вариант А", "Вариант Б", "Вариант В", "Вариант Г"],
+        "results": {
+            "Вариант А": "Результат 1",
+            "Вариант Б": "Результат 2",
+            "Вариант В": "Результат 3",
+            "Вариант Г": "Результат 4"
+        }
+    },
+    {
+        "question": "Ваш третий вопрос?",
+        "options": ["Вариант А", "Вариант Б", "Вариант В", "Вариант Г"],
+        "results": {
+            "Вариант А": "Результат 1",
+            "Вариант Б": "Результат 2",
+            "Вариант В": "Результат 3",
+            "Вариант Г": "Результат 4"
+        }
+    }
+]
+
+# Словарь для хранения ответов пользователей во время квиза
+user_answers = {}
+```
+Часть 5. Клавиатура
+---
+```
+def get_main_keyboard():
+    """Создаёт клавиатуру с кнопками главного меню"""
+    return ReplyKeyboardMarkup(
+        keyboard=MenuText.get_all_buttons(), 
+        resize_keyboard=True
+    )
+```
+Часть 6. Обработчик команды /start
+---
+```
+@dp.message(Command("start"))
+async def cmd_start(message: types.Message):
+    """Когда пользователь пишет /start, показываем приветствие и кнопки"""
+    await message.answer(MenuText.MSG_START, reply_markup=get_main_keyboard())
+```
+Часть 7. Обработка информационных кнопок
+---
+```
+@dp.message(lambda message: message.text in [MenuText.BTN_1, MenuText.BTN_2, MenuText.BTN_3, MenuText.BTN_4])
+async def handle_info(message: types.Message):
+    """В зависимости от того, какую кнопку нажал пользователь, показываем нужный текст"""
+    texts = {
+        MenuText.BTN_1: MenuText.MSG_1,
+        MenuText.BTN_2: MenuText.MSG_2,
+        MenuText.BTN_3: MenuText.MSG_3,
+        MenuText.BTN_4: MenuText.MSG_4,
+    }
+    await message.answer(texts[message.text], reply_markup=get_main_keyboard())
+```
+Часть 8. Кнопка статистики
+---
+```
+@dp.message(lambda message: message.text == MenuText.BTN_STATS)
+async def show_stats(message: types.Message):
+    """Показывает статистику (топ самых популярных ответов)"""
+    stats = get_stats(5)
+    if not stats:
+        await message.answer(f"Пока никто не проходил тест! Будь первым — нажми '{MenuText.BTN_QUIZ}'", reply_markup=get_main_keyboard())
+        return
+    
+    text = "Топ самых популярных ответов:\n\n"
+    for i, (answer, count) in enumerate(stats, 1):
+        # Правильное склонение
+        if count % 10 == 1 and count % 100 != 11:
+            word = "раз"
+        elif 2 <= count % 10 <= 4 and (count % 100 < 10 or count % 100 >= 20):
+            word = "раза"
+        else:
+            word = "раз"
+        text += f"{i}. {answer} — {count} {word}\n"
+    
+    await message.answer(text, reply_markup=get_main_keyboard())
+```
+Часть 9. Квиз
+---
+```
+@dp.message(lambda message: message.text == MenuText.BTN_QUIZ)
+async def start_quiz(message: types.Message):
+    """Запускает квиз"""
+    user_id = message.from_user.id
+    user_answers[user_id] = {"step": 0, "answers": []}
+    await send_quiz_question(message, user_id)
+
+async def send_quiz_question(message: types.Message, user_id: int):
+    """Отправляет текущий вопрос квиза"""
+    step = user_answers[user_id]["step"]
+    if step >= len(QUIZ):
+        await finish_quiz(message, user_id)
+        return
+    
+    q = QUIZ[step]
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=opt, callback_data=f"quiz_{step}_{opt}")] for opt in q["options"]
+    ])
+    await message.answer(f"❓ Вопрос {step+1}/{len(QUIZ)}: {q['question']}", reply_markup=keyboard)
+
+@dp.callback_query(lambda c: c.data and c.data.startswith("quiz_"))
+async def handle_quiz_answer(callback: types.CallbackQuery):
+    """Обрабатывает нажатие на кнопки ответа в квизе"""
+    user_id = callback.from_user.id
+    if user_id not in user_answers:
+        await callback.message.answer(f"Начни тест заново кнопкой '{MenuText.BTN_QUIZ}'", reply_markup=get_main_keyboard())
+        await callback.answer()
+        return
+    
+    parts = callback.data.split("_")
+    step = int(parts[1])
+    answer = "_".join(parts[2:]).replace("_", " ")
+    
+    q = QUIZ[step]
+    result = q["results"].get(answer, "Неопределённый результат")
+    
+    user_answers[user_id]["answers"].append(result)
+    user_answers[user_id]["step"] += 1
+    
+    await callback.message.delete()
+    
+    if user_answers[user_id]["step"] >= len(QUIZ):
+        await finish_quiz(callback.message, user_id)
+    else:
+        await send_quiz_question(callback.message, user_id)
+    
+    await callback.answer()
+
+async def finish_quiz(message: types.Message, user_id: int):
+    """Завершает квиз, сохраняет результат и показывает итог"""
+    answers = user_answers[user_id]["answers"]
+    final_result = answers[-1] if answers else "Неопределённо"
+    
+    username = message.from_user.username or message.from_user.first_name
+    save_result(user_id, username, final_result)
+    
+    result_text = f"🎉 Ваш результат: **{final_result}**!\n\nСпасибо за участие!"
+    await message.answer(result_text, reply_markup=get_main_keyboard())
+    
+    del user_answers[user_id]
+```
+Часть 10. Запуск бота
+---
+```
+async def main():
+    init_db()
+    print("Бот запущен!")
+    print("База данных: quiz_stats.db")
+    print("Нажми /start в Telegram\n")
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+## Шаг 8. Запуск бота
+В командной строке (с активированным виртуальным окружением) выполните:
+```
+python bot.py
+```
+Если всё сделано правильно, вы увидите:
+```
+Бот запущен!
+База данных: quiz_stats.db
+Нажми /start в Telegram
+```
+Бот работает! Не закрывайте командную строку — бот работает только пока она открыта.
+## Шаг 9. Тестирование бота в Telegram
+1. Откройте Telegram на телефоне или компьютере
+2. Найдите своего бота по username
+3. Нажмите кнопку «Start» или отправьте команду /start
+4. Проверьте работу всех кнопок
+5. Пройдите квиз
+6. Посмотрите статистику
