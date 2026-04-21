@@ -271,6 +271,9 @@ class MenuText:
             [KeyboardButton(text=cls.BTN_STATS)]
         ]
 ```
+Вот так будут выглядить кнопки в боте
+[Кнопки бота](site/images/кнопки.jpg)
+
 Часть 3. База данных
 ---
 ```
