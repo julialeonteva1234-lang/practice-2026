@@ -118,7 +118,7 @@
 5. Telegram показывает ответ пользователю
 
 ---
-
+![Схема работы бота](../site/images/Схема.png)
 ## Шаг 1. Установка Python
 
 Python — это язык программирования, на котором мы будем писать бота.
@@ -271,6 +271,9 @@ class MenuText:
             [KeyboardButton(text=cls.BTN_STATS)]
         ]
 ```
+Вот так будут выглядить кнопки в боте
+![Кнопки бота](../site/images/кнопки.jpg)
+
 Часть 3. База данных
 ---
 ```
@@ -317,10 +320,11 @@ def get_stats(limit=5):
     return results
 ```
 Часть 4. Вопросы для квиза
-Здесь вы определяете, какие вопросы будут в квизе. Каждый вопрос содержит:
-question — текст вопроса
-options — список вариантов ответа
-results — соответствие между вариантом ответа и результатом
+---
+Здесь вы определяете, какие вопросы будут в квизе. Каждый вопрос содержит:  
+question — текст вопроса  
+options — список вариантов ответа  
+results — соответствие между вариантом ответа и результатом  
 ```
 QUIZ = [
     {
@@ -478,6 +482,9 @@ async def finish_quiz(message: types.Message, user_id: int):
     
     del user_answers[user_id]
 ```
+Диаграмма последовательности процесса прохождения квиза  
+![Диаграмма](../site/images/Диаграмма.png)  
+
 Часть 10. Запуск бота
 ---
 ```
@@ -510,3 +517,86 @@ python bot.py
 4. Проверьте работу всех кнопок
 5. Пройдите квиз
 6. Посмотрите статистику
+
+# Модификация
+в базовой версии бота результаты квиза нигде не сохранялись. После прохождения пользователь просто получал свой результат. Я добавила функцию сбора статистики и кнопку, которая показывает топ-5 самых популярных грибов среди всех пользователей.  
+Зачем это нужно:
+- Пользователям интересно сравнивать себя с другими
+- Появляется элемент соревнования
+- Стимулирует проходить квиз снова
+- Администратор проекта видит, какие ответы самые популярные
+## Что изменилось
+Добавлена база данных SQLite, в которой сохраняются результаты пользователей. По кнопке "Топ грибов" любой пользователь бота может посмотреть статистику топ-5 самых популярных результата.  
+## Техническая реализация
+Шаг 1. Создание базы данных
+---
+Добавлена функция init_db(), которая создаёт файл quiz_stats.db и таблицу quiz_results:
+```
+def init_db():
+    conn = sqlite3.connect("quiz_stats.db")
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS quiz_results (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            username TEXT,
+            mushroom_type TEXT,
+            date TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+```
+Шаг 2. Сохранение результатов
+---
+Добавлена функция save_quiz_result(), которая вызывается в конце квиза:
+```
+def save_quiz_result(user_id, username, mushroom_type):
+    conn = sqlite3.connect("quiz_stats.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO quiz_results (user_id, username, mushroom_type, date) VALUES (?, ?, ?, ?)",
+        (user_id, username, mushroom_type, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    )
+    conn.commit()
+    conn.close()
+```
+Шаг 3. Получение статистики
+---
+Добавлена функция get_top_mushrooms(), которая делает запрос к базе данных:
+```
+def get_top_mushrooms(limit=5):
+    conn = sqlite3.connect("quiz_stats.db")
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT mushroom_type, COUNT(*) as count 
+        FROM quiz_results 
+        GROUP BY mushroom_type 
+        ORDER BY count DESC 
+        LIMIT ?
+    ''', (limit,))
+    results = cursor.fetchall()
+    conn.close()
+    return results
+```
+Шаг 4. Добавление кнопки в меню
+---
+Кнопка была добавлена в меню и в список всех кнопок
+
+Шаг 5. Обработчик кнопки
+---
+Добавлен обработчик, который реагирует на нажатие кнопки «Топ грибов»:
+```
+@dp.message(lambda message: message.text == MenuText.BTN_TOP)
+async def show_top_mushrooms(message: types.Message):
+    top = get_top_mushrooms(5)
+    if not top:
+        await message.answer("📊 Пока никто не проходил квиз! Будь первым — нажми 'Узнать какой ты гриб'", reply_markup=get_main_keyboard())
+        return
+    
+    text = "🏆 Топ-5 самых популярных грибов среди пользователей:\n\n"
+    for i, (mushroom, count) in enumerate(top, 1):
+        text += f"{i}. {mushroom} — {count} раз(а) 🍄\n"
+    
+    await message.answer(text, reply_markup=get_main_keyboard())
+```
