@@ -8,6 +8,12 @@
 
 ---
 
+<video width="100%" controls autoplay loop muted>
+  <source src="/images/video mashroom1.mp4" type="video/mp4">
+</video>
+
+---
+
 ## О проекте
 
 <div style="background: #f0f7f0; padding: 25px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #2c5f2d;">
